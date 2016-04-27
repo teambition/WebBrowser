@@ -1,0 +1,14 @@
+/* 
+  WebBrowser.strings
+  WebBrowser
+
+  Created by Xin Hong on 16/4/27.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "완료";
+"Cancel" = "취소";
+"Open" = "열기";
+"OpenExternalAppAlert.title" = "떠나다이 App?";
+"OpenExternalAppAlert.message" = "이 페이지 애쓰고 있다 열기 다른 App, 확정 열기？";
+"Open in Safari" = "Safari로 열기";

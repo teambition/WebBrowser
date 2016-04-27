@@ -1,0 +1,14 @@
+/* 
+  WebBrowser.strings
+  WebBrowser
+
+  Created by Xin Hong on 16/4/27.
+  Copyright © 2016年 Teambition. All rights reserved.
+*/
+
+"Done" = "完成";
+"Cancel" = "取消";
+"Open" = "打開";
+"OpenExternalAppAlert.title" = "離開此App？";
+"OpenExternalAppAlert.message" = "此頁面正試圖打開另一App，確定要打開嗎？";
+"Open in Safari" = "在 Safari 中打開";
