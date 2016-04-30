@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D35C00271CCF4FC200F8203D /* WebBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C00261CCF4FC200F8203D /* WebBrowserViewController.swift */; };
 		D35C002D1CCF77F300F8203D /* WebBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C002C1CCF77F300F8203D /* WebBrowserDelegate.swift */; };
+		D364C6E71CD503010059EA13 /* NavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364C6E61CD503010059EA13 /* NavigationBarAppearance.swift */; };
+		D364C6E91CD503510059EA13 /* ToolbarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364C6E81CD503510059EA13 /* ToolbarAppearance.swift */; };
 		D3C0B10C1CD06F7D005AC0A0 /* WebBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C0B10B1CD06F7D005AC0A0 /* WebBrowser.swift */; };
 		D3C0B10F1CD0877A005AC0A0 /* WebBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3C0B10E1CD0877A005AC0A0 /* WebBrowser.xcassets */; };
 		D3C0B12B1CD0AA90005AC0A0 /* WebBrowser.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3C0B12D1CD0AA90005AC0A0 /* WebBrowser.strings */; };
@@ -21,6 +23,8 @@
 		D35C00241CCF4E8B00F8203D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "WebBrowser/Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		D35C00261CCF4FC200F8203D /* WebBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowserViewController.swift; sourceTree = "<group>"; };
 		D35C002C1CCF77F300F8203D /* WebBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowserDelegate.swift; sourceTree = "<group>"; };
+		D364C6E61CD503010059EA13 /* NavigationBarAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarAppearance.swift; sourceTree = "<group>"; };
+		D364C6E81CD503510059EA13 /* ToolbarAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarAppearance.swift; sourceTree = "<group>"; };
 		D3C0B10B1CD06F7D005AC0A0 /* WebBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowser.swift; sourceTree = "<group>"; };
 		D3C0B10E1CD0877A005AC0A0 /* WebBrowser.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WebBrowser.xcassets; sourceTree = "<group>"; };
 		D3C0B12C1CD0AA90005AC0A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebBrowser.strings; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				D3C0B10B1CD06F7D005AC0A0 /* WebBrowser.swift */,
 				D3C0B1331CD0AB92005AC0A0 /* InternationalControl.swift */,
 				D3C0B1351CD0BAF8005AC0A0 /* SafariActivity.swift */,
+				D364C6E61CD503010059EA13 /* NavigationBarAppearance.swift */,
+				D364C6E81CD503510059EA13 /* ToolbarAppearance.swift */,
 			);
 			path = WebBrowser;
 			sourceTree = "<group>";
@@ -185,8 +191,10 @@
 				D3C0B1361CD0BAF8005AC0A0 /* SafariActivity.swift in Sources */,
 				D35C002D1CCF77F300F8203D /* WebBrowserDelegate.swift in Sources */,
 				D35C00271CCF4FC200F8203D /* WebBrowserViewController.swift in Sources */,
+				D364C6E91CD503510059EA13 /* ToolbarAppearance.swift in Sources */,
 				D3C0B1341CD0AB92005AC0A0 /* InternationalControl.swift in Sources */,
 				D3C0B10C1CD06F7D005AC0A0 /* WebBrowser.swift in Sources */,
+				D364C6E71CD503010059EA13 /* NavigationBarAppearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

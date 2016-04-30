@@ -52,8 +52,8 @@ public class WebBrowserViewController: UIViewController {
         progressView.tintColor = self.tintColor
         return progressView
     }()
-    private var previousNavigationControllerNavigationBar: (hidden: Bool, tintColor: UIColor, barTintColor: UIColor?) = (hidden: false, tintColor: UIColor.blueColor(), barTintColor: nil)
-    private var previousNavigationControllerToolbar: (hidden: Bool, tintColor: UIColor, barTintColor: UIColor?) = (hidden: true, tintColor: UIColor.blueColor(), barTintColor: nil)
+    private var previousNavigationControllerNavigationBarAppearance = NavigationBarAppearance()
+    private var previousNavigationControllerToolbarAppearance = ToolbarAppearance()
 
     private lazy var refreshButton: UIBarButtonItem = {
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(WebBrowserViewController.refreshButtonTapped(_:)))
@@ -94,16 +94,20 @@ public class WebBrowserViewController: UIViewController {
         savePreviousNavigationControllerState()
         configureWebView()
         configureProgressView()
-        updateTintColor()
-        updateBarTintColor()
     }
 
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.setToolbarHidden(toolbarHidden, animated: true)
+        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.translucent = true
         navigationController?.navigationBar.addSubview(progressView)
+        navigationController?.setToolbarHidden(toolbarHidden, animated: true)
+
         progressView.alpha = 0
+        updateTintColor()
+        updateBarTintColor()
         updateToolBarState()
     }
 
@@ -187,17 +191,26 @@ extension WebBrowserViewController {
         guard let navigationController = navigationController else {
             return
         }
-        previousNavigationControllerNavigationBar = (hidden: navigationController.navigationBarHidden, tintColor: navigationController.navigationBar.tintColor, barTintColor: navigationController.navigationBar.barTintColor)
-        previousNavigationControllerToolbar = (hidden: navigationController.toolbarHidden, tintColor: navigationController.toolbar.tintColor, barTintColor: navigationController.toolbar.barTintColor)
+
+        var navigationBarAppearance = NavigationBarAppearance(navigationBar: navigationController.navigationBar)
+        navigationBarAppearance.hidden = navigationController.navigationBarHidden
+        previousNavigationControllerNavigationBarAppearance = navigationBarAppearance
+
+        var toolbarAppearance = ToolbarAppearance(toolbar: navigationController.toolbar)
+        toolbarAppearance.hidden = navigationController.toolbarHidden
+        previousNavigationControllerToolbarAppearance = toolbarAppearance
     }
 
     private func restorePreviousNavigationControllerState(animated animated: Bool) {
-        navigationController?.setNavigationBarHidden(previousNavigationControllerNavigationBar.hidden, animated: animated)
-        navigationController?.setToolbarHidden(previousNavigationControllerToolbar.hidden, animated: animated)
-        navigationController?.navigationBar.tintColor = previousNavigationControllerNavigationBar.tintColor
-        navigationController?.navigationBar.barTintColor = previousNavigationControllerNavigationBar.barTintColor
-        navigationController?.toolbar.tintColor = previousNavigationControllerToolbar.tintColor
-        navigationController?.toolbar.barTintColor = previousNavigationControllerToolbar.barTintColor
+        guard let navigationController = navigationController else {
+            return
+        }
+
+        navigationController.setNavigationBarHidden(previousNavigationControllerNavigationBarAppearance.hidden, animated: animated)
+        navigationController.setToolbarHidden(previousNavigationControllerToolbarAppearance.hidden, animated: animated)
+
+        previousNavigationControllerNavigationBarAppearance.applyToNavigationBar(navigationController.navigationBar)
+        previousNavigationControllerToolbarAppearance.applyToToolbar(navigationController.toolbar)
     }
 
     private func updateTintColor() {
