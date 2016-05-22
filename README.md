@@ -10,10 +10,20 @@ Specify "WebBrowser" in your ```Cartfile```:
 github "teambition/WebBrowser"
 ```
 
+###CocoaPods
+Specify "WebBrowser" in your ```Podfile```:
+```ruby 
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'WebBrowser'
+```
+
 ###Usage
 ##### Initialization
 ```swift
-let webBrowserViewController = WebBrowserViewController(configuration: nil)
+let webBrowserViewController = WebBrowserViewController()
 // assign delegate
 webBrowserViewController.delegate = self
 

@@ -45,7 +45,7 @@ public class WebBrowserViewController: UIViewController {
     public var showURLInNavigationBarWhenLoading = true
     public var showsPageTitleInNavigationBar = true
 
-    private var webView: WKWebView!
+    private var webView = WKWebView(frame: CGRect.zero)
     private lazy var progressView: UIProgressView = { [unowned self] in
         let progressView = UIProgressView(progressViewStyle: .Default)
         progressView.trackTintColor = UIColor.clearColor()
@@ -117,13 +117,9 @@ public class WebBrowserViewController: UIViewController {
         progressView.removeFromSuperview()
     }
 
-    public convenience init(configuration: WKWebViewConfiguration?) {
+    public convenience init(configuration: WKWebViewConfiguration) {
         self.init()
-        if let configuration = configuration {
-            webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        } else {
-            webView = WKWebView(frame: CGRect.zero)
-        }
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
     }
 
     public class func rootNavigationWebBrowser(webBrowser webBrowser: WebBrowserViewController) -> UINavigationController {

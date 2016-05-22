@@ -78,7 +78,7 @@ class WebBrowserExampleViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let URL = NSURL(string: URLStrings[indexPath.row]) {
-            let webBrowserViewController = WebBrowserViewController(configuration: nil)
+            let webBrowserViewController = WebBrowserViewController()
             webBrowserViewController.delegate = self
 
 //            webBrowserViewController.barTintColor = UIColor.redColor()
