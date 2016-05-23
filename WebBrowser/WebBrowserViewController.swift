@@ -64,12 +64,12 @@ public class WebBrowserViewController: UIViewController {
         return stopButton
     }()
     private lazy var backButton: UIBarButtonItem = {
-        let backIcon = UIImage(named: "backIcon", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) ?? UIImage(named: "backIcon", inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        let backIcon = WebBrowser.image(named: "backIcon")
         let backButton = UIBarButtonItem(image: backIcon, style: .Plain, target: self, action: #selector(WebBrowserViewController.backButtonTapped(_:)))
         return backButton
     }()
     private lazy var forwardButton: UIBarButtonItem = {
-        let forwardIcon = UIImage(named: "forwardIcon", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) ?? UIImage(named: "forwardIcon", inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        let forwardIcon = WebBrowser.image(named: "forwardIcon")
         let forwardButton = UIBarButtonItem(image: forwardIcon, style: .Plain, target: self, action: #selector(WebBrowserViewController.forwardButtonTapped(_:)))
         return forwardButton
     }()

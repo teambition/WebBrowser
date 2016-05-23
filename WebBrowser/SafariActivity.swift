@@ -20,7 +20,7 @@ public class SafariActivity: UIActivity {
     }
 
     public override func activityImage() -> UIImage? {
-        return UIImage(named: "safariIcon", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) ?? UIImage(named: "safariIcon", inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        return WebBrowser.image(named: "safariIcon")
     }
 
     public override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {

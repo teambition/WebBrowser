@@ -35,8 +35,7 @@ internal struct InternationalControl {
     internal var language: WebBrowserLanguage = .English
 
     internal func localizedString(key key: String, comment: String? = nil) -> String {
-        let path = NSBundle(identifier: "Teambition.WebBrowser")?.pathForResource(language.identifier, ofType: "lproj") ?? NSBundle.mainBundle().pathForResource(language.identifier, ofType: "lproj")
-        guard let localizationPath = path else {
+        guard let localizationPath = WebBrowser.localizationPath(forIdentifier: language.identifier) else {
             return key
         }
         let bundle = NSBundle(path: localizationPath)

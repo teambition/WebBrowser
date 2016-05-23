@@ -89,7 +89,7 @@ class WebBrowserExampleViewController: UITableViewController {
 //            webBrowserViewController.showURLInNavigationBarWhenLoading = false
 //            webBrowserViewController.showsPageTitleInNavigationBar = false
 
-            webBrowserViewController.language = .English
+            webBrowserViewController.language = .SimplifiedChinese
             webBrowserViewController.tintColor = kTBBlueColor
             webBrowserViewController.loadURL(URL)
 
