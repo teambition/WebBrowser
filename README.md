@@ -27,14 +27,14 @@ let webBrowserViewController = WebBrowserViewController()
 // assign delegate
 webBrowserViewController.delegate = self
 
-webBrowserViewController.language = .English
+webBrowserViewController.language = .english
 webBrowserViewController.tintColor = ...
 webBrowserViewController.barTintColor = ...
-webBrowserViewController.toolbarHidden = false
-webBrowserViewController.showActionBarButton = true
+webBrowserViewController.isToolbarHidden = false
+webBrowserViewController.isShowActionBarButton = true
 webBrowserViewController.toolbarItemSpace = 50
-webBrowserViewController.showURLInNavigationBarWhenLoading = true
-webBrowserViewController.showsPageTitleInNavigationBar = true
+webBrowserViewController.isShowURLInNavigationBarWhenLoading = true
+webBrowserViewController.isShowPageTitleInNavigationBar = true
 webBrowserViewController.customApplicationActivities = ...
 
 webBrowserViewController.loadURLString("https://www.apple.com/cn/")
@@ -48,28 +48,28 @@ navigationController?.pushViewController(webBrowserViewController, animated: tru
 ##### Presenting modally
 ```swift
 let navigationWebBrowser = WebBrowserViewController.rootNavigationWebBrowser(webBrowser: webBrowserViewController)
-presentViewController(navigationWebBrowser, animated: true, completion: nil)
+present(navigationWebBrowser, animated: true, completion: nil)
 ```
 
 #####  Implement the delegate
 ```swift
-func webBrowser(webBrowser: WebBrowserViewController, didStartLoadingURL URL: NSURL?) {
+func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoad url: URL?) {
     // do something
 }
 
-func webBrowser(webBrowser: WebBrowserViewController, didFinishLoadingURL URL: NSURL?) {
+func webBrowser(_ webBrowser: WebBrowserViewController, didFinishLoad url: URL?) {
     // do something
 }
 
-func webBrowser(webBrowser: WebBrowserViewController, didFailToLoadURL URL: NSURL?, error: NSError) {
+func webBrowser(_ webBrowser: WebBrowserViewController, didFailLoad url: URL?, withError error: Error) {
     // do something
 }
 
-func webBrowserWillDismiss(webBrowser: WebBrowserViewController) {
+func webBrowserWillDismiss(_ webBrowser: WebBrowserViewController) {
     // do something
 }
 
-func webBrowserDidDismiss(webBrowser: WebBrowserViewController) {
+func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController) {
     // do something
 }
 ```
