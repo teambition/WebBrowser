@@ -9,86 +9,86 @@
 import UIKit
 import WebKit
 
-public class WebBrowserViewController: UIViewController {
-    public weak var delegate: WebBrowserDelegate?
-    public var language: WebBrowserLanguage = .English {
+open class WebBrowserViewController: UIViewController {
+    open weak var delegate: WebBrowserDelegate?
+    open var language: WebBrowserLanguage = .english {
         didSet {
             InternationalControl.sharedControl.language = language
         }
     }
-    public var tintColor = UIColor.blueColor() {
+    open var tintColor = UIColor.blue {
         didSet {
             updateTintColor()
         }
     }
-    public var barTintColor: UIColor? {
+    open var barTintColor: UIColor? {
         didSet {
             updateBarTintColor()
         }
     }
-    public var toolbarHidden = false {
+    open var isToolbarHidden = false {
         didSet {
-            navigationController?.setToolbarHidden(toolbarHidden, animated: true)
+            navigationController?.setToolbarHidden(isToolbarHidden, animated: true)
         }
     }
-    public var toolbarItemSpace = WebBrowser.defaultToolbarItemSpace {
+    open var toolbarItemSpace = WebBrowser.defaultToolbarItemSpace {
         didSet {
             itemFixedSeparator.width = toolbarItemSpace
         }
     }
-    public var showActionBarButton = true {
+    open var isShowActionBarButton = true {
         didSet {
             updateToolBarState()
         }
     }
-    public var customApplicationActivities = [UIActivity]()
-    public var showURLInNavigationBarWhenLoading = true
-    public var showsPageTitleInNavigationBar = true
+    open var customApplicationActivities = [UIActivity]()
+    open var isShowURLInNavigationBarWhenLoading = true
+    open var isShowPageTitleInNavigationBar = true
 
-    private var webView = WKWebView(frame: CGRect.zero)
-    private lazy var progressView: UIProgressView = { [unowned self] in
-        let progressView = UIProgressView(progressViewStyle: .Default)
-        progressView.trackTintColor = UIColor.clearColor()
+    fileprivate var webView = WKWebView(frame: CGRect.zero)
+    fileprivate lazy var progressView: UIProgressView = { [unowned self] in
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.trackTintColor = UIColor.clear
         progressView.tintColor = self.tintColor
         return progressView
     }()
-    private var previousNavigationControllerNavigationBarAppearance = NavigationBarAppearance()
-    private var previousNavigationControllerToolbarAppearance = ToolbarAppearance()
+    fileprivate var previousNavigationControllerNavigationBarAppearance = NavigationBarAppearance()
+    fileprivate var previousNavigationControllerToolbarAppearance = ToolbarAppearance()
 
-    private lazy var refreshButton: UIBarButtonItem = {
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(WebBrowserViewController.refreshButtonTapped(_:)))
+    fileprivate lazy var refreshButton: UIBarButtonItem = {
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(WebBrowserViewController.refreshButtonTapped(_:)))
         return refreshButton
     }()
-    private lazy var stopButton: UIBarButtonItem = {
-        let stopButton = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(WebBrowserViewController.stopButtonTapped(_:)))
+    fileprivate lazy var stopButton: UIBarButtonItem = {
+        let stopButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(WebBrowserViewController.stopButtonTapped(_:)))
         return stopButton
     }()
-    private lazy var backButton: UIBarButtonItem = {
+    fileprivate lazy var backButton: UIBarButtonItem = {
         let backIcon = WebBrowser.image(named: "backIcon")
-        let backButton = UIBarButtonItem(image: backIcon, style: .Plain, target: self, action: #selector(WebBrowserViewController.backButtonTapped(_:)))
+        let backButton = UIBarButtonItem(image: backIcon, style: .plain, target: self, action: #selector(WebBrowserViewController.backButtonTapped(_:)))
         return backButton
     }()
-    private lazy var forwardButton: UIBarButtonItem = {
+    fileprivate lazy var forwardButton: UIBarButtonItem = {
         let forwardIcon = WebBrowser.image(named: "forwardIcon")
-        let forwardButton = UIBarButtonItem(image: forwardIcon, style: .Plain, target: self, action: #selector(WebBrowserViewController.forwardButtonTapped(_:)))
+        let forwardButton = UIBarButtonItem(image: forwardIcon, style: .plain, target: self, action: #selector(WebBrowserViewController.forwardButtonTapped(_:)))
         return forwardButton
     }()
-    private lazy var actionButton: UIBarButtonItem = {
-        let actionButton = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(WebBrowserViewController.actionButtonTapped(_:)))
+    fileprivate lazy var actionButton: UIBarButtonItem = {
+        let actionButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(WebBrowserViewController.actionButtonTapped(_:)))
         return actionButton
     }()
-    private lazy var itemFixedSeparator: UIBarButtonItem = { [unowned self] in
-        let itemFixedSeparator = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+    fileprivate lazy var itemFixedSeparator: UIBarButtonItem = { [unowned self] in
+        let itemFixedSeparator = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         itemFixedSeparator.width = self.toolbarItemSpace
         return itemFixedSeparator
     }()
-    private lazy var itemFlexibleSeparator: UIBarButtonItem = {
-        let itemFlexibleSeparator = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+    fileprivate lazy var itemFlexibleSeparator: UIBarButtonItem = {
+        let itemFlexibleSeparator = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         return itemFlexibleSeparator
     }()
 
     // MARK: - Life cycle
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         savePreviousNavigationControllerState()
@@ -96,14 +96,14 @@ public class WebBrowserViewController: UIViewController {
         configureProgressView()
     }
 
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.addSubview(progressView)
-        navigationController?.setToolbarHidden(toolbarHidden, animated: true)
+        navigationController?.setToolbarHidden(isToolbarHidden, animated: true)
 
         progressView.alpha = 0
         updateTintColor()
@@ -111,7 +111,7 @@ public class WebBrowserViewController: UIViewController {
         updateToolBarState()
     }
 
-    public override func viewWillDisappear(animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         restorePreviousNavigationControllerState(animated: animated)
         progressView.removeFromSuperview()
@@ -122,57 +122,57 @@ public class WebBrowserViewController: UIViewController {
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
     }
 
-    public class func rootNavigationWebBrowser(webBrowser webBrowser: WebBrowserViewController) -> UINavigationController {
-        webBrowser.navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizedString(key: "Done"), style: .Done, target: webBrowser, action: #selector(WebBrowserViewController.doneButtonTapped(_:)))
+    open class func rootNavigationWebBrowser(webBrowser: WebBrowserViewController) -> UINavigationController {
+        webBrowser.navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizedString(key: "Done"), style: .done, target: webBrowser, action: #selector(WebBrowserViewController.doneButtonTapped(_:)))
         let navigationController = UINavigationController(rootViewController: webBrowser)
         return navigationController
     }
 
     deinit {
-        webView.UIDelegate = nil
+        webView.uiDelegate = nil
         webView.navigationDelegate = nil
-        if isViewLoaded() {
+        if isViewLoaded {
             webView.removeObserver(self, forKeyPath: WebBrowser.estimatedProgressKeyPath)
         }
     }
 
     // MARK: - Public
-    public func loadRequest(request: NSURLRequest) {
-        webView.loadRequest(request)
+    open func loadRequest(_ request: URLRequest) {
+        webView.load(request)
     }
 
-    public func loadURL(URL: NSURL) {
-        webView.loadRequest(NSURLRequest(URL: URL))
+    open func loadURL(_ url: URL) {
+        webView.load(URLRequest(url: url))
     }
 
-    public func loadURLString(URLString: String) {
-        guard let URL = NSURL(string: URLString) else {
+    open func loadURLString(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
             return
         }
-        webView.loadRequest(NSURLRequest(URL: URL))
+        webView.load(URLRequest(url: url))
     }
 
-    public func loadHTMLString(HTMLString: String, baseURL: NSURL?) {
-        webView.loadHTMLString(HTMLString, baseURL: baseURL)
+    open func loadHTMLString(_ htmlString: String, baseURL: URL?) {
+        webView.loadHTMLString(htmlString, baseURL: baseURL)
     }
 }
 
 extension WebBrowserViewController {
     // MARK: - Helper
-    private func configureWebView() {
+    fileprivate func configureWebView() {
         webView.frame = view.bounds
-        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.autoresizesSubviews = true
         webView.navigationDelegate = self
-        webView.UIDelegate = self
-        webView.multipleTouchEnabled = true
+        webView.uiDelegate = self
+        webView.isMultipleTouchEnabled = true
         webView.scrollView.alwaysBounceVertical = true
         view.addSubview(webView)
 
-        webView.addObserver(self, forKeyPath: WebBrowser.estimatedProgressKeyPath, options: .New, context: &WebBrowser.estimatedProgressContext)
+        webView.addObserver(self, forKeyPath: WebBrowser.estimatedProgressKeyPath, options: .new, context: &WebBrowser.estimatedProgressContext)
     }
 
-    private func configureProgressView() {
+    fileprivate func configureProgressView() {
         let yPosition: CGFloat = { [unowned self] in
             guard let navigationBar = self.navigationController?.navigationBar else {
                 return 0
@@ -180,42 +180,42 @@ extension WebBrowserViewController {
             return navigationBar.frame.height - self.progressView.frame.height
         }()
         progressView.frame = CGRect(x: 0, y: yPosition, width: view.frame.width, height: progressView.frame.width)
-        progressView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
+        progressView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
     }
 
-    private func savePreviousNavigationControllerState() {
+    fileprivate func savePreviousNavigationControllerState() {
         guard let navigationController = navigationController else {
             return
         }
 
         var navigationBarAppearance = NavigationBarAppearance(navigationBar: navigationController.navigationBar)
-        navigationBarAppearance.hidden = navigationController.navigationBarHidden
+        navigationBarAppearance.isHidden = navigationController.isNavigationBarHidden
         previousNavigationControllerNavigationBarAppearance = navigationBarAppearance
 
         var toolbarAppearance = ToolbarAppearance(toolbar: navigationController.toolbar)
-        toolbarAppearance.hidden = navigationController.toolbarHidden
+        toolbarAppearance.isHidden = navigationController.isToolbarHidden
         previousNavigationControllerToolbarAppearance = toolbarAppearance
     }
 
-    private func restorePreviousNavigationControllerState(animated animated: Bool) {
+    fileprivate func restorePreviousNavigationControllerState(animated: Bool) {
         guard let navigationController = navigationController else {
             return
         }
 
-        navigationController.setNavigationBarHidden(previousNavigationControllerNavigationBarAppearance.hidden, animated: animated)
-        navigationController.setToolbarHidden(previousNavigationControllerToolbarAppearance.hidden, animated: animated)
+        navigationController.setNavigationBarHidden(previousNavigationControllerNavigationBarAppearance.isHidden, animated: animated)
+        navigationController.setToolbarHidden(previousNavigationControllerToolbarAppearance.isHidden, animated: animated)
 
-        previousNavigationControllerNavigationBarAppearance.applyToNavigationBar(navigationController.navigationBar)
-        previousNavigationControllerToolbarAppearance.applyToToolbar(navigationController.toolbar)
+        previousNavigationControllerNavigationBarAppearance.apply(to: navigationController.navigationBar)
+        previousNavigationControllerToolbarAppearance.apply(to: navigationController.toolbar)
     }
 
-    private func updateTintColor() {
+    fileprivate func updateTintColor() {
         progressView.tintColor = tintColor
         navigationController?.navigationBar.tintColor = tintColor
         navigationController?.toolbar.tintColor = tintColor
     }
 
-    private func updateBarTintColor() {
+    fileprivate func updateBarTintColor() {
         navigationController?.navigationBar.barTintColor = barTintColor
         navigationController?.toolbar.barTintColor = barTintColor
     }
@@ -223,51 +223,51 @@ extension WebBrowserViewController {
 
 extension WebBrowserViewController {
     // MARK: - UIBarButtonItem actions
-    func refreshButtonTapped(sender: UIBarButtonItem) {
+    func refreshButtonTapped(_ sender: UIBarButtonItem) {
         webView.stopLoading()
         webView.reload()
     }
 
-    func stopButtonTapped(sender: UIBarButtonItem) {
+    func stopButtonTapped(_ sender: UIBarButtonItem) {
         webView.stopLoading()
     }
 
-    func backButtonTapped(sender: UIBarButtonItem) {
+    func backButtonTapped(_ sender: UIBarButtonItem) {
         webView.goBack()
         updateToolBarState()
     }
 
-    func forwardButtonTapped(sender: UIBarButtonItem) {
+    func forwardButtonTapped(_ sender: UIBarButtonItem) {
         webView.goForward()
         updateToolBarState()
     }
 
-    func actionButtonTapped(sender: UIBarButtonItem) {
-        dispatch_async(dispatch_get_main_queue()) {
-            var activityItems = [AnyObject]()
-            if let URL = self.webView.URL {
-                activityItems.append(URL)
+    func actionButtonTapped(_ sender: UIBarButtonItem) {
+        DispatchQueue.main.async {
+            var activityItems = [Any]()
+            if let url = self.webView.url {
+                activityItems.append(url)
             }
             var applicationActivities = [UIActivity]()
             applicationActivities.append(SafariActivity())
-            applicationActivities.appendContentsOf(self.customApplicationActivities)
+            applicationActivities.append(contentsOf: self.customApplicationActivities)
 
             let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             activityViewController.view.tintColor = self.tintColor
 
-            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            if UIDevice.current.userInterfaceIdiom == .pad {
                 activityViewController.popoverPresentationController?.barButtonItem = sender
-                activityViewController.popoverPresentationController?.permittedArrowDirections = .Any
-                self.presentViewController(activityViewController, animated: true, completion: nil)
+                activityViewController.popoverPresentationController?.permittedArrowDirections = .any
+                self.present(activityViewController, animated: true, completion: nil)
             } else {
-                self.presentViewController(activityViewController, animated: true, completion: nil)
+                self.present(activityViewController, animated: true, completion: nil)
             }
         }
     }
 
-    func doneButtonTapped(sender: UIBarButtonItem) {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.webBrowserWillDismiss(self)
-        dismissViewControllerAnimated(true) {
+        dismiss(animated: true) {
             self.delegate?.webBrowserDidDismiss(self)
         }
     }
@@ -275,26 +275,26 @@ extension WebBrowserViewController {
 
 extension WebBrowserViewController {
     // MARK: - Tool bar
-    private func updateToolBarState() {
-        backButton.enabled = webView.canGoBack
-        forwardButton.enabled = webView.canGoForward
+    fileprivate func updateToolBarState() {
+        backButton.isEnabled = webView.canGoBack
+        forwardButton.isEnabled = webView.canGoForward
 
         var barButtonItems = [UIBarButtonItem]()
-        if webView.loading {
+        if webView.isLoading {
             barButtonItems = [backButton, itemFixedSeparator, forwardButton, itemFixedSeparator, stopButton, itemFlexibleSeparator]
-            if let URLString = webView.URL?.absoluteString where showURLInNavigationBarWhenLoading {
-                var titleString = URLString.stringByReplacingOccurrencesOfString("http://", withString: "", options: .LiteralSearch, range: nil)
-                titleString = titleString.stringByReplacingOccurrencesOfString("https://", withString: "", options: .LiteralSearch, range: nil)
+            if let urlString = webView.url?.absoluteString, isShowURLInNavigationBarWhenLoading {
+                var titleString = urlString.replacingOccurrences(of: "http://", with: "", options: .literal, range: nil)
+                titleString = titleString.replacingOccurrences(of: "https://", with: "", options: .literal, range: nil)
                 navigationItem.title = titleString
             }
         } else {
             barButtonItems = [backButton, itemFixedSeparator, forwardButton, itemFixedSeparator, refreshButton, itemFlexibleSeparator]
-            if showsPageTitleInNavigationBar {
+            if isShowPageTitleInNavigationBar {
                 navigationItem.title = webView.title
             }
         }
 
-        if showActionBarButton {
+        if isShowActionBarButton {
             barButtonItems.append(actionButton)
         }
 
@@ -304,90 +304,94 @@ extension WebBrowserViewController {
 
 extension WebBrowserViewController {
     // MARK: - External app support
-    private func externalAppRequiredToOpenURL(URL: NSURL) -> Bool {
+    fileprivate func externalAppRequiredToOpen(_ url: URL) -> Bool {
         let validSchemes: Set<String> = ["http", "https"]
-        return !validSchemes.contains(URL.scheme)
+        if let urlScheme = url.scheme {
+            return !validSchemes.contains(urlScheme)
+        } else {
+            return false
+        }
     }
 
-    private func openExternalAppWithURL(URL: NSURL) {
-        let externalAppPermissionAlert = UIAlertController(title: LocalizedString(key: "OpenExternalAppAlert.title"), message: LocalizedString(key: "OpenExternalAppAlert.message"), preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: LocalizedString(key: "Cancel"), style: .Cancel, handler: nil)
-        let openAction = UIAlertAction(title: LocalizedString(key: "Open"), style: .Default) { (action) in
-            UIApplication.sharedApplication().openURL(URL)
+    fileprivate func openExternalApp(with url: URL) {
+        let externalAppPermissionAlert = UIAlertController(title: LocalizedString(key: "OpenExternalAppAlert.title"), message: LocalizedString(key: "OpenExternalAppAlert.message"), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: LocalizedString(key: "Cancel"), style: .cancel, handler: nil)
+        let openAction = UIAlertAction(title: LocalizedString(key: "Open"), style: .default) { (action) in
+            UIApplication.shared.openURL(url)
         }
         externalAppPermissionAlert.addAction(cancelAction)
         externalAppPermissionAlert.addAction(openAction)
-        presentViewController(externalAppPermissionAlert, animated: true, completion: nil)
+        present(externalAppPermissionAlert, animated: true, completion: nil)
     }
 }
 
 extension WebBrowserViewController {
     // MARK: - Observer
-    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if let keyPath = keyPath where (keyPath == WebBrowser.estimatedProgressKeyPath && context == &WebBrowser.estimatedProgressContext) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let keyPath = keyPath, (keyPath == WebBrowser.estimatedProgressKeyPath && context == &WebBrowser.estimatedProgressContext) {
             progressView.alpha = 1
             let animated = webView.estimatedProgress > Double(progressView.progress)
             progressView.setProgress(Float(webView.estimatedProgress), animated: animated)
 
             if webView.estimatedProgress >= 1 {
-                UIView.animateWithDuration(0.3, delay: 0.3, options: .CurveEaseOut, animations: {
+                UIView.animate(withDuration: 0.3, delay: 0.3, options: .curveEaseOut, animations: {
                     self.progressView.alpha = 0
                     }, completion: { (finished) in
                         self.progressView.progress = 0
                 })
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 }
 
 extension WebBrowserViewController: WKNavigationDelegate {
     // MARK: - WKNavigationDelegate
-    public func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         updateToolBarState()
-        delegate?.webBrowser(self, didStartLoadingURL: webView.URL)
+        delegate?.webBrowser(self, didStartLoad: webView.url)
     }
 
-    public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         updateToolBarState()
-        delegate?.webBrowser(self, didFinishLoadingURL: webView.URL)
+        delegate?.webBrowser(self, didFinishLoad: webView.url)
     }
 
-    public func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         updateToolBarState()
-        delegate?.webBrowser(self, didFailToLoadURL: webView.URL, error: error)
+        delegate?.webBrowser(self, didFailLoad: webView.url, withError: error)
     }
 
-    public func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         updateToolBarState()
-        delegate?.webBrowser(self, didFailToLoadURL: webView.URL, error: error)
+        delegate?.webBrowser(self, didFailLoad: webView.url, withError: error)
     }
 
-    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        if let URL = navigationAction.request.URL {
-            if !externalAppRequiredToOpenURL(URL) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            if !externalAppRequiredToOpen(url) {
                 if navigationAction.targetFrame == nil {
-                    loadURL(URL)
-                    decisionHandler(.Cancel)
+                    loadURL(url)
+                    decisionHandler(.cancel)
                     return
                 }
-            } else if UIApplication.sharedApplication().canOpenURL(URL) {
-                openExternalAppWithURL(URL)
-                decisionHandler(.Cancel)
+            } else if UIApplication.shared.canOpenURL(url) {
+                openExternalApp(with: url)
+                decisionHandler(.cancel)
                 return
             }
         }
 
-        decisionHandler(.Allow)
+        decisionHandler(.allow)
     }
 }
 
 extension WebBrowserViewController: WKUIDelegate {
     // MARK: - WKUIDelegate
-    public func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let mainFrame = navigationAction.targetFrame?.mainFrame where mainFrame == false {
-            webView.loadRequest(navigationAction.request)
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let mainFrame = navigationAction.targetFrame?.isMainFrame, mainFrame == false {
+            webView.load(navigationAction.request)
         }
         return nil
     }

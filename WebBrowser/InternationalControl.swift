@@ -9,36 +9,36 @@
 import Foundation
 
 public enum WebBrowserLanguage {
-    case English
-    case SimplifiedChinese
-    case TraditionalChinese
-    case Korean
-    case Japanese
+    case english
+    case simplifiedChinese
+    case traditionalChinese
+    case korean
+    case japanese
 
     internal var identifier: String {
         switch self {
-        case .English: return "en"
-        case .SimplifiedChinese: return "zh-Hans"
-        case .TraditionalChinese: return "zh-Hant"
-        case .Korean: return "ko"
-        case .Japanese: return "ja"
+        case .english: return "en"
+        case .simplifiedChinese: return "zh-Hans"
+        case .traditionalChinese: return "zh-Hant"
+        case .korean: return "ko"
+        case .japanese: return "ja"
         }
     }
 }
 
-internal func LocalizedString(key key: String, comment: String? = nil) -> String {
+internal func LocalizedString(key: String, comment: String? = nil) -> String {
     return InternationalControl.sharedControl.localizedString(key: key, comment: comment)
 }
 
 internal struct InternationalControl {
     internal static var sharedControl = InternationalControl()
-    internal var language: WebBrowserLanguage = .English
+    internal var language: WebBrowserLanguage = .english
 
-    internal func localizedString(key key: String, comment: String? = nil) -> String {
+    internal func localizedString(key: String, comment: String? = nil) -> String {
         guard let localizationPath = WebBrowser.localizationPath(forIdentifier: language.identifier) else {
             return key
         }
-        let bundle = NSBundle(path: localizationPath)
-        return bundle?.localizedStringForKey(key, value: nil, table: "WebBrowser") ?? key
+        let bundle = Bundle(path: localizationPath)
+        return bundle?.localizedString(forKey: key, value: nil, table: "WebBrowser") ?? key
     }
 }

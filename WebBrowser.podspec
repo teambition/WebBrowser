@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                 = "WebBrowser"
-  s.version              = "0.0.8"
+  s.version              = "0.0.9"
   s.summary              = "A web browser using WebKit and written in Swift for iOS apps."
 
   s.homepage             = "https://github.com/teambition/WebBrowser"

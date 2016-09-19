@@ -9,22 +9,22 @@
 import UIKit
 
 internal struct ToolbarAppearance {
-    var hidden = true
-    var tintColor = UIColor.blueColor()
+    var isHidden = true
+    var tintColor = UIColor.blue
     var barTintColor: UIColor?
-    var translucent = true
+    var isTranslucent = true
 
     init() { }
 
     init(toolbar: UIToolbar) {
         tintColor = toolbar.tintColor
         barTintColor = toolbar.barTintColor
-        translucent = toolbar.translucent
+        isTranslucent = toolbar.isTranslucent
     }
 
-    func applyToToolbar(toolbar: UIToolbar) {
+    func apply(to toolbar: UIToolbar) {
         toolbar.tintColor = tintColor
         toolbar.barTintColor = barTintColor
-        toolbar.translucent = translucent
+        toolbar.isTranslucent = isTranslucent
     }
 }

@@ -13,25 +13,25 @@ internal struct WebBrowser {
     static var estimatedProgressContext = 0
     static let defaultToolbarItemSpace: CGFloat = 50
 
-    static var resourceBundleURL: NSURL? {
-        let resourceBundleURL = NSBundle(forClass: WebBrowserViewController.self).URLForResource("WebBrowser", withExtension: "bundle")
+    static var resourceBundleURL: URL? {
+        let resourceBundleURL = Bundle(for: WebBrowserViewController.self).url(forResource: "WebBrowser", withExtension: "bundle")
         return resourceBundleURL
     }
 
     static func localizationPath(forIdentifier identifier: String) -> String? {
-        if let  path = NSBundle(identifier: "Teambition.WebBrowser")?.pathForResource(identifier, ofType: "lproj") {
+        if let  path = Bundle(identifier: "Teambition.WebBrowser")?.path(forResource: identifier, ofType: "lproj") {
             return path
-        } else if let resourceBundleURL = resourceBundleURL, resourceBundle = NSBundle(URL: resourceBundleURL) {
-            return resourceBundle.pathForResource(identifier, ofType: "lproj")
+        } else if let resourceBundleURL = resourceBundleURL, let resourceBundle = Bundle(url: resourceBundleURL) {
+            return resourceBundle.path(forResource: identifier, ofType: "lproj")
         }
         return nil
     }
 
     static func image(named name: String) -> UIImage? {
-        if let image = UIImage(named: name, inBundle: NSBundle(forClass: WebBrowserViewController.self), compatibleWithTraitCollection: nil) {
+        if let image = UIImage(named: name, in: Bundle(for: WebBrowserViewController.self), compatibleWith: nil) {
             return image
-        } else if let resourceBundleURL = resourceBundleURL, resourceBundle = NSBundle(URL: resourceBundleURL) {
-            return UIImage(named: name, inBundle: resourceBundle, compatibleWithTraitCollection: nil)
+        } else if let resourceBundleURL = resourceBundleURL, let resourceBundle = Bundle(url: resourceBundleURL) {
+            return UIImage(named: name, in: resourceBundle, compatibleWith: nil)
         }
         return nil
     }
