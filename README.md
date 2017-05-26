@@ -1,16 +1,16 @@
-#WebBrowser
+# WebBrowser
 A web browser using WebKit and written in Swift for iOS apps.
 
 ![Example](Gif/WebBrowserExample.gif "WebBrowserExample")
 
-##How To Get Started
-###Carthage
+## How To Get Started
+### Carthage
 Specify "WebBrowser" in your ```Cartfile```:
 ```ogdl 
 github "teambition/WebBrowser"
 ```
 
-###CocoaPods
+### CocoaPods
 Specify "WebBrowser" in your ```Podfile```:
 ```ruby 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -20,8 +20,8 @@ use_frameworks!
 pod 'WebBrowser'
 ```
 
-###Usage
-##### Initialization
+### Usage
+#### Initialization
 ```swift
 let webBrowserViewController = WebBrowserViewController()
 // assign delegate
@@ -40,18 +40,18 @@ webBrowserViewController.customApplicationActivities = ...
 webBrowserViewController.loadURLString("https://www.apple.com/cn/")
 ```
 
-##### Pushing to the navigation stack
+#### Pushing to the navigation stack
 ```swift
 navigationController?.pushViewController(webBrowserViewController, animated: true)
 ```
 
-##### Presenting modally
+#### Presenting modally
 ```swift
 let navigationWebBrowser = WebBrowserViewController.rootNavigationWebBrowser(webBrowser: webBrowserViewController)
 present(navigationWebBrowser, animated: true, completion: nil)
 ```
 
-#####  Implement the delegate
+####  Implement the delegate
 ```swift
 func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoad url: URL?) {
     // do something
@@ -77,7 +77,7 @@ func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController) {
 ## Minimum Requirement
 iOS 8.0
 
-##Localization
+## Localization
 WebBrowser supports 5 languages: English, Simplified Chinese, Traditional Chinese, Korean, Japanese. You can set the language when initialization.
 
 ## Release Notes
