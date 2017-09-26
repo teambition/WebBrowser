@@ -223,26 +223,26 @@ extension WebBrowserViewController {
 
 extension WebBrowserViewController {
     // MARK: - UIBarButtonItem actions
-    func refreshButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func refreshButtonTapped(_ sender: UIBarButtonItem) {
         webView.stopLoading()
         webView.reload()
     }
 
-    func stopButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func stopButtonTapped(_ sender: UIBarButtonItem) {
         webView.stopLoading()
     }
 
-    func backButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func backButtonTapped(_ sender: UIBarButtonItem) {
         webView.goBack()
         updateToolBarState()
     }
 
-    func forwardButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func forwardButtonTapped(_ sender: UIBarButtonItem) {
         webView.goForward()
         updateToolBarState()
     }
 
-    func actionButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func actionButtonTapped(_ sender: UIBarButtonItem) {
         DispatchQueue.main.async {
             var activityItems = [Any]()
             if let url = self.webView.url {
@@ -265,7 +265,7 @@ extension WebBrowserViewController {
         }
     }
 
-    func doneButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.webBrowserWillDismiss(self)
         dismiss(animated: true) {
             self.delegate?.webBrowserDidDismiss(self)
