@@ -369,6 +369,9 @@ extension WebBrowserViewController: WKNavigationDelegate {
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let oriDelegate = delegate, oriDelegate.webBrowser(self, decidePolicyFor: navigationAction, decisionHandler: decisionHandler) {
+            return
+        }
         if let url = navigationAction.request.url {
             if !externalAppRequiredToOpen(url) {
                 if navigationAction.targetFrame == nil {

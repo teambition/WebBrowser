@@ -11,23 +11,8 @@
 		D35C00041CCF4CF000F8203D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35C00031CCF4CF000F8203D /* Assets.xcassets */; };
 		D35CFFFD1CCF4CF000F8203D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CFFFC1CCF4CF000F8203D /* AppDelegate.swift */; };
 		D35CFFFF1CCF4CF000F8203D /* WebBrowserExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CFFFE1CCF4CF000F8203D /* WebBrowserExampleViewController.swift */; };
-		D3C0B13B1CD0C644005AC0A0 /* WebBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C0B13A1CD0C644005AC0A0 /* WebBrowser.framework */; };
-		D3C0B13C1CD0C644005AC0A0 /* WebBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3C0B13A1CD0C644005AC0A0 /* WebBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F1EADC321FA18DBC001C7F1A /* WebBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1EADC311FA18DBC001C7F1A /* WebBrowser.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D3C0B13D1CD0C644005AC0A0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D3C0B13C1CD0C644005AC0A0 /* WebBrowser.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D35C00011CCF4CF000F8203D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -36,7 +21,7 @@
 		D35CFFF91CCF4CF000F8203D /* WebBrowserExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebBrowserExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35CFFFC1CCF4CF000F8203D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D35CFFFE1CCF4CF000F8203D /* WebBrowserExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserExampleViewController.swift; sourceTree = "<group>"; };
-		D3C0B13A1CD0C644005AC0A0 /* WebBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = WebBrowser.framework; path = "/Users/hongxin/Library/Developer/Xcode/DerivedData/WebBrowser-fkbatfbzvadoichdmguxqbcstzqu/Build/Products/Debug-iphoneos/WebBrowser.framework"; sourceTree = "<absolute>"; };
+		F1EADC311FA18DBC001C7F1A /* WebBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebBrowser.framework; path = "../../../Library/Developer/Xcode/DerivedData/WebBrowser-gsaarijfurczmkautdlxajwvxudl/Build/Products/Debug-iphonesimulator/WebBrowser.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3C0B13B1CD0C644005AC0A0 /* WebBrowser.framework in Frameworks */,
+				F1EADC321FA18DBC001C7F1A /* WebBrowser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,9 +39,9 @@
 		D35CFFF01CCF4CF000F8203D = {
 			isa = PBXGroup;
 			children = (
-				D3C0B13A1CD0C644005AC0A0 /* WebBrowser.framework */,
 				D35CFFFB1CCF4CF000F8203D /* WebBrowserExample */,
 				D35CFFFA1CCF4CF000F8203D /* Products */,
+				F1EADC301FA18DBC001C7F1A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +65,14 @@
 			path = WebBrowserExample;
 			sourceTree = "<group>";
 		};
+		F1EADC301FA18DBC001C7F1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1EADC311FA18DBC001C7F1A /* WebBrowser.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,7 +83,6 @@
 				D35CFFF51CCF4CF000F8203D /* Sources */,
 				D35CFFF61CCF4CF000F8203D /* Frameworks */,
 				D35CFFF71CCF4CF000F8203D /* Resources */,
-				D3C0B13D1CD0C644005AC0A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

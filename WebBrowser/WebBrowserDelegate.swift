@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 public protocol WebBrowserDelegate: class {
     func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoad url: URL?)
@@ -15,6 +16,7 @@ public protocol WebBrowserDelegate: class {
 
     func webBrowserWillDismiss(_ webBrowser: WebBrowserViewController)
     func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController)
+    func webBrowser(_ webBrowser: WebBrowserViewController, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) -> Bool
 }
 
 public extension WebBrowserDelegate {
@@ -36,5 +38,9 @@ public extension WebBrowserDelegate {
 
     func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController) {
 
+    }
+    
+    func webBrowser(_ webBrowser: WebBrowserViewController, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) -> Bool {
+        return false
     }
 }
