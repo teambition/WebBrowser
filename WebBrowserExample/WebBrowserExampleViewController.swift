@@ -20,7 +20,8 @@ private let urlStrings: [String] = ["https://www.apple.com/cn/",
                                     "http://cn.bing.com/ditu/",
                                     "http://www.youku.com",
                                     "http://www.google.com",
-                                    "https://www.facebook.com/",]
+                                    "https://www.facebook.com/",
+                                    "mailto:zi@123.com"]
 private let websiteTitles: [String] = ["Apple",
                                        "WebBrowser - Github",
                                        "Teambition",
@@ -30,7 +31,8 @@ private let websiteTitles: [String] = ["Apple",
                                        "必应地图",
                                        "优酷",
                                        "Google",
-                                       "Facebook"]
+                                       "Facebook",
+                                        "邮箱"]
 
 class WebBrowserExampleViewController: UITableViewController {
     // MARK: - Life cycle
@@ -81,6 +83,11 @@ class WebBrowserExampleViewController: UITableViewController {
             let webBrowserViewController = WebBrowserViewController()
             webBrowserViewController.delegate = self
 
+            webBrowserViewController.onOpenExternalAppHandler = { [weak self] _ in
+                guard let `self` = self else { return }
+                self.navigationController?.popViewController(animated: true)
+            }
+            
             webBrowserViewController.language = .simplifiedChinese
             webBrowserViewController.tintColor = kTBBlueColor
             webBrowserViewController.loadURL(url)

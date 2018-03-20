@@ -87,6 +87,8 @@ open class WebBrowserViewController: UIViewController {
         return itemFlexibleSeparator
     }()
 
+    public var onOpenExternalAppHandler: ((_ isOpen: Bool) -> Void)?
+    
     // MARK: - Life cycle
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -315,9 +317,12 @@ extension WebBrowserViewController {
 
     fileprivate func openExternalApp(with url: URL) {
         let externalAppPermissionAlert = UIAlertController(title: LocalizedString(key: "OpenExternalAppAlert.title"), message: LocalizedString(key: "OpenExternalAppAlert.message"), preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: LocalizedString(key: "Cancel"), style: .cancel, handler: nil)
-        let openAction = UIAlertAction(title: LocalizedString(key: "Open"), style: .default) { (action) in
+        let cancelAction = UIAlertAction(title: LocalizedString(key: "Cancel"), style: .cancel, handler: { [weak self] (action) in
+            self?.onOpenExternalAppHandler?(false)
+        })
+        let openAction = UIAlertAction(title: LocalizedString(key: "Open"), style: .default) { [weak self] (action) in
             UIApplication.shared.openURL(url)
+            self?.onOpenExternalAppHandler?(true)
         }
         externalAppPermissionAlert.addAction(cancelAction)
         externalAppPermissionAlert.addAction(openAction)
