@@ -32,7 +32,7 @@ private let websiteTitles: [String] = ["Apple",
                                        "优酷",
                                        "Google",
                                        "Facebook",
-                                        "邮箱"]
+                                       "邮箱"]
 
 class WebBrowserExampleViewController: UITableViewController {
     // MARK: - Life cycle
