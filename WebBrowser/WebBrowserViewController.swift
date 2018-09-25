@@ -46,9 +46,9 @@ open class WebBrowserViewController: UIViewController {
     open var isShowPageTitleInNavigationBar = true
 
     fileprivate var webView = WKWebView(frame: CGRect.zero)
-    fileprivate lazy var progressView: UIProgressView = { [unowned self] in
+    fileprivate lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
-        progressView.trackTintColor = UIColor.clear
+        progressView.trackTintColor = .clear
         progressView.tintColor = self.tintColor
         return progressView
     }()
@@ -77,7 +77,7 @@ open class WebBrowserViewController: UIViewController {
         let actionButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(WebBrowserViewController.actionButtonTapped(_:)))
         return actionButton
     }()
-    fileprivate lazy var itemFixedSeparator: UIBarButtonItem = { [unowned self] in
+    fileprivate lazy var itemFixedSeparator: UIBarButtonItem = {
         let itemFixedSeparator = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         itemFixedSeparator.width = self.toolbarItemSpace
         return itemFixedSeparator
@@ -175,7 +175,7 @@ extension WebBrowserViewController {
     }
 
     fileprivate func configureProgressView() {
-        let yPosition: CGFloat = { [unowned self] in
+        let yPosition: CGFloat = {
             guard let navigationBar = self.navigationController?.navigationBar else {
                 return 0
             }

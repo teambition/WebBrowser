@@ -11,8 +11,8 @@ import UIKit
 open class SafariActivity: UIActivity {
     open var url: URL?
 
-    open override var activityType: UIActivityType? {
-        return UIActivityType(String(describing: self))
+    open override var activityType: UIActivity.ActivityType? {
+        return ActivityType(String(describing: self))
     }
 
     open override var activityTitle : String? {
