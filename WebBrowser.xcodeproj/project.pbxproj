@@ -147,13 +147,13 @@
 				TargetAttributes = {
 					D35C00171CCF4E1300F8203D = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
 			buildConfigurationList = D35C00121CCF4E1300F8203D /* Build configuration list for PBXProject "WebBrowser" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -161,6 +161,7 @@
 				"zh-Hant",
 				ko,
 				ja,
+				Base,
 			);
 			mainGroup = D35C000E1CCF4E1300F8203D;
 			productRefGroup = D35C00191CCF4E1300F8203D /* Products */;
@@ -349,8 +350,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -369,8 +369,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Teambition.WebBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
